@@ -1,0 +1,39 @@
+.bar-width-0{width:0%}
+.bar-width-10{width:10%}
+.bar-width-20{width:20%}
+.bar-width-30{width:30%}
+.bar-width-40{width:40%}
+.bar-width-50{width:50%}
+.bar-width-60{width:60%}
+.bar-width-70{width:70%}
+.bar-width-80{width:80%}
+.bar-width-90{width:90%}
+.bar-width-100{width:100%}
+.language-toggle{border:1px solid #d5e0e9;border-radius:8px;background:#fff;color:#24547e;padding:7px 11px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer}
+.language-toggle:hover{background:#f1f6fa}
+.report-id-card{display:flex;align-items:center;gap:14px;max-width:340px;margin:6px 0 10px 35px;padding:12px 14px;border:1px solid #cfe3da;border-left:4px solid #178365;border-radius:10px;background:#f3faf6}
+.report-id-card div{flex:1}
+.report-id-card span,.report-id-card strong{display:block}
+.report-id-card span{color:#607b6e;font-size:10px}
+.report-id-card strong{margin-top:3px;color:#174e3c;font:700 20px "DM Sans",sans-serif;letter-spacing:.5px}
+.report-id-card button{border:1px solid #cfe3da;border-radius:7px;background:#fff;color:#1b654e;padding:8px 10px;font:inherit;font-size:10px;font-weight:600;white-space:nowrap;cursor:pointer}
+.report-id-card button:hover{background:#e8f4ed}
+@media(max-width:1100px) and (min-width:851px){
+  .topbar{gap:12px;padding:0 3%}
+  .brand{flex-shrink:0;gap:8px}
+  .brand strong{font-size:15px}
+  .brand small{font-size:8px;letter-spacing:1px}
+  .topbar nav{flex:1;justify-content:center;gap:clamp(8px,1.3vw,14px)}
+  .topbar nav a{font-size:11px;white-space:nowrap}
+  .language-toggle,.pilot-badge{flex-shrink:0}
+  .pilot-badge{white-space:nowrap;padding:7px 9px}
+  .hero{grid-template-columns:1.08fr .92fr;gap:12px;padding-right:4%;padding-left:4%}
+  .hero h1{font-size:clamp(35px,4.3vw,42px)}
+  .hero-illustration{transform:scale(.86);transform-origin:center right;margin-left:-10px}
+  .school-building{left:35px}
+  .chip-one{left:4px}
+}
+@media(max-width:600px){
+  .report-id-card{max-width:calc(100% - 35px);margin-left:35px;padding:10px;gap:8px}
+  .report-id-card button{padding:8px}
+}

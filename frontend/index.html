@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#123f72">
+    <meta name="description" content="Speak, discover government schools, and report infrastructure issues in Hindi with School360 Voice.">
+    <title>School360 Voice — Speak. Discover. Report. Improve.</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/bar-widths.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">मुख्य सामग्री पर जाएँ</a>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="School360 Voice होम">
+        <span class="brand-mark" aria-hidden="true">360</span>
+        <span><strong>School360</strong><small>VOICE · KANPUR</small></span>
+      </a>
+      <nav aria-label="मुख्य नेविगेशन">
+        <a href="#assistant">आवाज़ सहायक</a>
+        <a href="#schools">स्कूल खोजें</a>
+        <a href="#my-reports">मेरी रिपोर्ट</a>
+        <a href="#admin">प्रशासन</a>
+      </nav>
+      <button id="language-toggle" class="language-toggle" type="button" aria-label="Switch to English">English</button>
+      <span class="pilot-badge"><span></span> कानपुर पायलट</span>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> आपकी आवाज़, आपके स्कूल के लिए</p>
+          <h1>स्कूल की बात,<br><span>अपनी भाषा में।</span></h1>
+          <p class="hero-description">सरकारी स्कूलों की जानकारी पाएँ और पानी, शौचालय या दूसरी समस्याएँ बोलकर दर्ज करें। बिना जटिल फ़ॉर्म, सीधे हिंदी में।</p>
+          <a class="button button-light" href="#assistant">बातचीत शुरू करें <span aria-hidden="true">↓</span></a>
+          <div class="hero-promise"><span aria-hidden="true">✓</span> आपकी रिपोर्ट सीधे रिकॉर्ड होती है · स्थिति कभी भी देखें</div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <div class="sun"></div><div class="school-building"><div class="roof"></div><div class="building-face"><span class="school-sign">हमारा स्कूल</span><div class="window-row"><i></i><i></i><i></i></div><div class="door"></div><div class="window-row lower"><i></i><i></i><i></i></div></div></div>
+          <div class="ground"></div><div class="hero-chip chip-one"><span aria-hidden="true">🎙️</span> <span>बोलकर बताइए</span></div><div class="hero-chip chip-two"><span aria-hidden="true">🏫</span> <span>स्कूल की जानकारी</span></div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="सेवा के बारे में">
+        <div><strong>हिंदी पहले</strong><span>बोलें या लिखें</span></div>
+        <div><strong>साफ़ जानकारी</strong><span>अनजान डेटा को अनजान ही दिखाएँ</span></div>
+        <div><strong>वास्तविक रिपोर्ट</strong><span>डेटाबेस में दर्ज होने पर ही पुष्टि</span></div>
+        <div><strong>कानपुर, उत्तर प्रदेश</strong><span>स्थानीय पायलट</span></div>
+      </section>
+
+      <section class="section assistant-section" id="assistant">
+        <div class="section-heading">
+          <div><p class="eyebrow">आपका आवाज़ सहायक</p><h2>बताइए, क्या जानना है?</h2></div>
+          <span class="demo-label">हिंदी में उपलब्ध</span>
+        </div>
+        <div class="assistant-card">
+          <div class="assistant-intro">
+            <div class="assistant-avatar" aria-hidden="true">S<span>✦</span></div>
+            <div><strong>नमस्ते! मैं School360 हूँ।</strong><p>स्कूल खोजें, सुविधाओं के बारे में पूछें या समस्या की रिपोर्ट करें।</p></div>
+            <span class="assistant-online"><i></i> तैयार</span>
+          </div>
+          <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="बातचीत">
+            <div class="message assistant-message"><span class="message-avatar">S</span><p>नमस्ते! आप मुझसे हिंदी में बात कर सकते हैं। उदाहरण: “कानपुर के स्कूल खोजें” या “पानी की टंकी खराब है।”</p></div>
+          </div>
+          <div class="voice-controls">
+            <button type="button" class="mic-button" id="mic-button" aria-label="बोलने के लिए शुरू करें"><span class="mic-icon" aria-hidden="true">🎙</span><span id="mic-label">बोलने के लिए दबाएँ</span></button>
+            <div class="voice-feedback"><span class="voice-state" id="voice-state" data-state="idle"><i></i><span id="voice-status" aria-live="polite">अब आप बोल सकते हैं।</span></span><p id="transcript" class="transcript" aria-live="polite"></p></div>
+          </div>
+          <form id="chat-form" class="chat-input">
+            <label class="sr-only" for="chat-message">अपना सवाल लिखें</label>
+            <input id="chat-message" name="message" autocomplete="off" maxlength="1000" placeholder="या यहाँ अपना सवाल लिखें…" required>
+            <button class="send-button" type="submit">भेजें <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="voice-note">🎧 आवाज़ के लिए ब्राउज़र में माइक्रोफ़ोन अनुमति दें। अनुमति न हो तो लिखकर जारी रखें।</p>
+        </div>
+      </section>
+
+      <section class="section" id="schools">
+        <div class="section-heading"><div><p class="eyebrow">अपने इलाके में</p><h2>स्कूल खोजें</h2><p class="section-subtitle">स्कूल का नाम, ब्लॉक या ज़िला लिखें। केवल उपलब्ध रिकॉर्ड दिखेंगे।</p></div><span class="section-icon" aria-hidden="true">⌕</span></div>
+        <form id="school-search-form" class="search-panel">
+          <label><span>स्कूल या जगह</span><input id="school-query" name="q" placeholder="जैसे: कानपुर, शिवराजपुर…"></label>
+          <label><span>ज़िला</span><select id="district-filter" name="district"><option value="">सभी ज़िले</option><option value="Kanpur Nagar">Kanpur Nagar</option><option value="Kanpur Dehat">Kanpur Dehat</option></select></label>
+          <label><span>स्कूल का प्रकार</span><select id="type-filter" name="type"><option value="">सभी प्रकार</option><option value="Government">Government</option><option value="Primary">Primary</option><option value="Upper Primary">Upper Primary</option><option value="Secondary">Secondary</option></select></label>
+          <button type="submit" class="button button-primary">स्कूल खोजें <span aria-hidden="true">⌕</span></button>
+        </form>
+        <div id="school-results" class="school-grid" aria-live="polite"><p class="empty-state">स्कूल देखने के लिए खोजें। इस डेमो में केवल स्पष्ट रूप से चिह्नित डेमो रिकॉर्ड शामिल हैं।</p></div>
+        <div id="school-detail" class="detail-panel" hidden></div>
+      </section>
+
+      <section class="report-banner" id="report">
+        <div class="report-icon" aria-hidden="true">!</div><div><p class="eyebrow">समस्या दिखे? हमें बताएँ।</p><h2>आपकी बात से बदलाव शुरू होता है।</h2><p>स्कूल चुनें, समस्या बोलकर बताएँ और रिपोर्ट ID से स्थिति देखें।</p></div><a class="button button-primary" href="#assistant">रिपोर्ट दर्ज करें <span aria-hidden="true">→</span></a>
+      </section>
+
+      <section class="section" id="my-reports">
+        <div class="section-heading"><div><p class="eyebrow">आपके भेजे हुए मामले</p><h2>मेरी रिपोर्ट</h2><p class="section-subtitle">रिपोर्ट भेजने के बाद ID चैट में दिखेगी और यहीं सेव रहेगी। स्थिति देखने के लिए ID डालें।</p></div><span class="section-icon" aria-hidden="true">▤</span></div>
+        <form id="report-lookup-form" class="lookup-form"><label class="sr-only" for="report-id">रिपोर्ट ID</label><input id="report-id" inputmode="numeric" placeholder="रिपोर्ट ID, जैसे 12"><button class="button button-primary" type="submit">स्थिति देखें</button></form>
+        <div id="my-report-results" class="report-grid" aria-live="polite"><p class="empty-state">अभी इस ब्राउज़र में कोई रिपोर्ट दर्ज नहीं है।</p></div>
+      </section>
+
+      <section class="admin-section" id="admin">
+        <div class="section-heading"><div><p class="eyebrow">ज़िम्मेदार कार्रवाई</p><h2>प्रशासन डैशबोर्ड</h2><p class="section-subtitle">आँकड़े स्कूल360 डेटाबेस से लाइव आते हैं।</p></div><span class="admin-lock">🔒 प्रशासन</span></div>
+        <div class="admin-filters">
+          <label><span>स्कूल ID</span><input id="admin-school-filter" inputmode="numeric" placeholder="सभी स्कूल"></label>
+          <label><span>समस्या</span><select id="admin-category-filter"><option value="">सभी श्रेणियाँ</option></select></label>
+          <label><span>स्थिति</span><select id="admin-status-filter"><option value="">सभी स्थितियाँ</option></select></label>
+          <button id="refresh-admin" class="button button-outline" type="button">आँकड़े ताज़ा करें</button>
+        </div>
+        <div id="dashboard-stats" class="stats-grid" aria-live="polite"><p class="empty-state">डैशबोर्ड लोड हो रहा है…</p></div>
+        <div class="admin-lower">
+          <section class="admin-panel"><h3>श्रेणी के अनुसार रिपोर्ट</h3><div id="category-stats" class="category-stats"></div></section>
+          <section class="admin-panel"><h3>हाल की रिपोर्टें <span class="admin-tag">वास्तविक रिकॉर्ड</span></h3><div id="admin-reports" class="admin-reports"></div></section>
+        </div>
+        <div class="admin-access"><strong>स्थिति बदलने के लिए प्रशासन पासवर्ड</strong><p>डेमो पासवर्ड: <code>school360-demo-admin</code> (इसे <code>ADMIN_PASSWORD</code> से बदलें)। यह स्थानीय डेमो पासवर्ड सार्वजनिक है, वास्तविक तैनाती के लिए सुरक्षित नहीं।</p><label><span>प्रशासन पासवर्ड</span><input id="admin-password" type="password" autocomplete="current-password" placeholder="स्थिति बदलने पर उपयोग होगा"></label><p id="admin-message" role="status"></p></div>
+      </section>
+
+      <section class="closing-cta"><p class="eyebrow">Speak. Discover. Report. Improve.</p><h2>अच्छे स्कूल, मजबूत समुदाय से बनते हैं।</h2><a href="#assistant" class="button button-light">अपनी बात कहें <span aria-hidden="true">↑</span></a></section>
+    </main>
+    <footer><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">360</span><span><strong>School360 Voice</strong><small>Speak. Discover. Report. Improve.</small></span></a><p>कानपुर, उत्तर प्रदेश · यह एक प्रोटोटाइप है। डेमो डेटा को स्पष्ट रूप से चिह्नित किया गया है।</p><a href="/api/health" target="_blank" rel="noreferrer">सेवा स्थिति</a></footer>
+  </body>
+</html>

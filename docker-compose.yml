@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-school360}
+      POSTGRES_USER: ${POSTGRES_USER:-school360}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-school360-local}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - school360-postgres:/var/lib/postgresql/data
+      - ./database/migrations/V1__init.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seed/V1__reference_data.sql:/docker-entrypoint-initdb.d/02-facilities.sql:ro
+      - ./database/migrations/V2__voice_reports.sql:/docker-entrypoint-initdb.d/03-voice-reports.sql:ro
+      - ./database/seed/V2__demo_data.sql:/docker-entrypoint-initdb.d/04-demo-data.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-school360}:${POSTGRES_PASSWORD:-school360-local}@db:5432/${POSTGRES_DB:-school360}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-school360-demo-admin}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 45s
+
+volumes:
+  school360-postgres:
